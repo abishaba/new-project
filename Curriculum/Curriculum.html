@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="learn Marketing">
+<title>learn Markting</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/docs/style.css">
+<link rel="shortcut icon" href="/img/logo-removebg-preview.png" type="image/x-icon">
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+<body>
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo"><a href="#"><img src="/img/logo-removebg-preview.png" alt=""></a></div>
+  <div class="nav-links" id="navLinks">
+    <a href="/docs/index.html">Home</a>
+    <a href="/About/index.html">About</a>
+    <a href="/Curriculum/Curriculum.html">Curriculum</a>
+    <a href="/Register Page/login.html" class="nav-cta">Start Now →</a>
+    <a href="/Register Page/login.html" class="icon">Account<i class="fi fi-rr-user"></i></a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO BANNER -->
+<section id="hero-banner">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-radial"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="pulse-dot"></span>13 Lessons · Full Curriculum</div>
+    <h1 class="hero-title">
+      Everything You'll Master<br>
+      <em class="serif gold-grad">Inside the Course</em>
+    </h1>
+    <p class="hero-sub">
+      A battle-tested, quiz-gated curriculum built from 14 years of live campaign data. Every lesson unlocks the next — because real mastery is non-negotiable.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-pill">🎓 <span class="pill-val">13</span> Lessons</div>
+      <div class="stat-pill">⏱ <span class="pill-val">7.5</span> Hours Total</div>
+      <div class="stat-pill">🧠 <span class="pill-val">13</span> Quiz Gates</div>
+      <div class="stat-pill">♾️ <span class="pill-val">Lifetime</span> Access</div>
+    </div>
+    <div class="progress-track-wrap" id="heroProgressWrap" style="display:none">
+      <div class="progress-track-label">
+        <span>Your Progress</span>
+        <strong id="heroPctLabel">0% Complete</strong>
+      </div>
+      <div class="track-bar"><div class="track-fill" id="heroTrackFill"></div></div>
+      <div class="track-dots" id="heroTrackDots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CURRICULUM LAYOUT -->
+<div id="curriculum-section">
+  <div class="curriculum-layout">
+
+    <!-- LEFT: ACCORDION -->
+    <div>
+      <!-- Module Tabs -->
+      <div class="module-tabs" id="moduleTabs">
+        <button class="module-tab active" onclick="filterModule(0,this)"><span class="tab-num">ALL</span>All Lessons</button>
+        <button class="module-tab" onclick="filterModule(1,this)"><span class="tab-num">01–04</span>Foundation</button>
+        <button class="module-tab" onclick="filterModule(2,this)"><span class="tab-num">05–08</span>Growth</button>
+        <button class="module-tab" onclick="filterModule(3,this)"><span class="tab-num">09–13</span>Mastery</button>
+      </div>
+
+      <!-- Section Header -->
+      <div class="reveal" style="margin-bottom:2rem">
+        <div class="section-eyebrow">Complete Curriculum</div>
+        <h2 class="section-title">13 Steps to <span style="color:var(--navy)">Marketing</span> <em class="serif" style="color:var(--gold-dark)">Excellence</em></h2>
+        <div class="section-divider"></div>
+        <p style="color:var(--gray-soft);font-size:.875rem;line-height:1.8;max-width:580px">
+          Each lesson builds on the last. Pass the comprehension quiz at the end of each module to unlock the next — proving mastery, not just completion.
+        </p>
+      </div>
+
+      <!-- ACCORDION LIST -->
+      <div class="accordion-list" id="accordionList"></div>
+    </div>
+
+    <!-- RIGHT: STICKY SIDEBAR -->
+    <div class="sticky-sidebar">
+      <div class="sidebar-card reveal delay-2">
+        <div class="sidebar-card-header">
+          <div class="sidebar-price">
+            <span class="old-price">$297</span>
+            $147<small>/one-time</small>
+          </div>
+          <div class="sidebar-badge">🔥 50% Off — Limited Time</div>
+        </div>
+        <div class="sidebar-content">
+          <div class="sidebar-includes">
+            <div class="include-item"><div class="include-icon">📹</div>7.5 Hours of Video Content</div>
+            <div class="include-item"><div class="include-icon">🧠</div>13 Comprehension Quizzes</div>
+            <div class="include-item"><div class="include-icon">📄</div>Downloadable Lesson Guides</div>
+            <div class="include-item"><div class="include-icon">👥</div>Private Community Access</div>
+            <div class="include-item"><div class="include-icon">♾️</div>Lifetime Access + Updates</div>
+          </div>
+          <a href="/login/login.html"><button class="sidebar-cta">🚀 Enroll Now — $147</button></a>
+          <div class="sidebar-guarantee">🔒 30-Day Money-Back Guarantee</div>
+
+          <!-- Live Progress -->
+          <div class="sidebar-progress" id="sidebarProgress">
+            <div class="prog-header">
+              <span class="prog-label">Your Progress</span>
+              <span class="prog-pct" id="sidePct">0%</span>
+            </div>
+            <div class="prog-bar"><div class="prog-fill" id="sideFill" style="width:0%"></div></div>
+            <div class="prog-sub" id="progSub">Complete registration to start</div>
+            <div class="module-mini" id="moduleMini"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick stats card -->
+      <div class="sidebar-card reveal delay-3" style="margin-top:1.25rem">
+        <div style="padding:1.25rem 1.5rem">
+          <div style="font-size:.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gray-soft);margin-bottom:1rem">Course At a Glance</div>
+          <div style="display:flex;flex-direction:column;gap:.75rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:.82rem">
+              <span style="color:var(--gray-soft)">Level</span>
+              <span style="font-weight:700;color:var(--navy-dark)">Beginner → Advanced</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:.82rem">
+              <span style="color:var(--gray-soft)">Language</span>
+              <span style="font-weight:700;color:var(--navy-dark)">English</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:.82rem">
+              <span style="color:var(--gray-soft)">Certificate</span>
+              <span style="font-weight:700;color:var(--green)">✓ Included</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:.82rem">
+              <span style="color:var(--gray-soft)">Quiz Gates</span>
+              <span style="font-weight:700;color:var(--navy-dark)">13 / 13 lessons</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:.82rem">
+              <span style="color:var(--gray-soft)">Access</span>
+              <span style="font-weight:700;color:var(--navy-dark)">Lifetime</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;font-size:.82rem">
+              <span style="color:var(--gray-soft)">Last Updated</span>
+              <span style="font-weight:700;color:var(--navy-dark)">Jan 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<section id="bottom-cta">
+  <div class="cta-inner reveal">
+    <h2 class="cta-title">
+      13 Lessons Stand Between You<br>
+      and <em class="serif gold-grad">Marketing Mastery</em>
+    </h2>
+    <p class="cta-sub">Every concept is proven in real campaigns. Every quiz ensures you actually learned it. Enroll today and start building a skill set that pays for itself.</p>
+    <div class="cta-actions">
+      <a href="/Register Page/login.html" class="btn-primary">🚀 Start Learning Now</a>
+      <a href="/About/index.html" class="btn-outline">About the Course →</a>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-logo">Learn Markting</div>
+  <p>© 2025 MasterMind Marketing Academy · All Rights Reserved</p>
+  <p style="margin-top:.5rem">Privacy Policy · Terms of Service · Contact</p>
+</footer>
+<!-- TOAST -->
+<div class="toast" id="toast"><span id="toastIcon">ℹ️</span><span id="toastMsg"></span></div>
+
+<script src="script.js"></script>
+</body>
+</html>

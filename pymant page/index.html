@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Checkout - Mastering Marketing</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-MiIla3UhHZjCqU1q4QfRPA0kHYjQuNz2Ye1I0jS4IFF0C3raCxj0W/bL0ig0rF4X7cV0lrOjPdS3Oob+G8np9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-950 to-slate-900 text-white">
+
+  <main class="mx-auto w-full max-w-6xl px-4 py-8">
+    <section class="glass-card overflow-hidden rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-md">
+      <div class="mb-6 flex items-center justify-between border-b border-white/20 pb-4">
+        <div>
+          <h1 class="text-3xl font-bold tracking-tight text-gold">Secure Checkout</h1>
+          <p class="mt-1 text-gray-300">Mastering Marketing - 13 Lessons + Certificate</p>
+        </div>
+        <div class="flex gap-3">
+          <span class="badge"><i class="fas fa-lock me-2"></i>SSL Secure</span>
+          <span class="badge"><i class="fas fa-shield-alt me-2"></i>Money-Back</span>
+          <span class="badge"><i class="fas fa-star me-2"></i>Trusted</span>
+        </div>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <!-- Left Order Summary -->
+        <div class="space-y-4 rounded-2xl border border-white/20 bg-white/10 p-5">
+          <h2 class="text-xl font-semibold text-gold">Order Summary</h2>
+          <div class="rounded-xl border border-white/10 bg-slate-900 p-4">
+            <h3 class="text-lg font-bold">Course</h3>
+            <p class="text-gray-200">Mastering Marketing</p>
+            <p class="mt-2 text-3xl font-bold text-gold">$297</p>
+          </div>
+
+          <div class="text-sm text-gray-200">
+            <h3 class="font-semibold text-white">Included</h3>
+            <ul class="mt-2 space-y-1">
+              <li><i class="fas fa-check text-emerald-400"></i> 13 Expert lessons</li>
+              <li><i class="fas fa-check text-emerald-400"></i> Certificate</li>
+              <li><i class="fas fa-check text-emerald-400"></i> Lifetime access</li>
+              <li><i class="fas fa-check text-emerald-400"></i> Community support</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between text-sm text-gray-300">
+            <span>Payment protection</span>
+            <span class="text-emerald-300 font-semibold">100% Secure</span>
+          </div>
+        </div>
+
+        <!-- Right Payment Form -->
+        <div class="rounded-2xl border border-white/20 bg-white/10 p-5">
+          <h2 class="text-xl font-semibold text-gold">Payment</h2>
+
+          <div class="mt-4 flex gap-2">
+            <button id="creditCardBtn" class="method-btn flex-1 rounded-lg border border-gold/60 bg-gold/20 py-2 text-white">Credit Card</button>
+            <button id="paypalBtn" class="method-btn flex-1 rounded-lg border border-slate-400/60 bg-slate-500/20 py-2 text-white">PayPal</button>
+          </div>
+
+          <form id="paymentForm" class="mt-5 space-y-4">
+            <div>
+              <label class="mb-1 block text-sm text-gray-300" for="cardName">Cardholder Name</label>
+              <input id="cardName" type="text" class="input-field" placeholder="John Doe" required>
+            </div>
+            <div>
+              <label class="mb-1 block text-sm text-gray-300" for="cardNumber">Card Number</label>
+              <input id="cardNumber" type="text" inputmode="numeric" maxlength="19" class="input-field" placeholder="1234 5678 9012 3456" required>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label class="mb-1 block text-sm text-gray-300" for="expiry">Expiry Date</label>
+                <input id="expiry" type="text" maxlength="5" class="input-field" placeholder="MM/YY" required>
+              </div>
+              <div>
+                <label class="mb-1 block text-sm text-gray-300" for="cvc">
+                  CVC
+                  <span class="text-sm text-gray-400" title="3-digit code on back of card"><i class="fas fa-info-circle"></i></span>
+                </label>
+                <input id="cvc" type="text" inputmode="numeric" maxlength="4" class="input-field" placeholder="123" required>
+              </div>
+            </div>
+            <button id="payNow" type="button" class="w-full rounded-xl bg-gold px-4 py-3 text-base font-bold text-slate-950 hover:bg-yellow-400 transition">
+              Pay Now <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+          </form>
+
+          <div id="status" class="mt-4 text-center text-sm font-bold text-white"></div>
+
+          <div class="mt-5 flex items-center justify-around gap-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa" class="h-8 w-auto opacity-80">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard" class="h-8 w-auto opacity-80">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="h-8 w-auto opacity-80">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside id="sidebar">
+  <div class="sidebar-logo"> 
+    <img src="/img/logo-removebg-preview.png" alt="">
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Main</div>
+    <div class="nav-item active" onclick="switchView('overview')">
+      <span class="nav-icon">◈</span> Overview
+    </div>
+    <div class="nav-item" onclick="switchView('students')">
+      <span class="nav-icon">◎</span> Students
+      <span class="nav-badge" id="navStudentCount">0</span>
+    </div>
+    <div class="nav-item" onclick="switchView('payments')">
+      <span class="nav-icon">◉</span> Payments
+      <span class="nav-badge green" id="navPaidCount">0</span>
+    </div>
+    <div class="nav-item" onclick="switchView('quizzes')">
+      <span class="nav-icon">◐</span> Quiz Logs
+      <span class="nav-badge red" id="navStuckCount">0</span>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Tools</div>
+    <div class="nav-item" onclick="showAddUserModal()">
+      <span class="nav-icon">＋</span> Add Test Student
+    </div>
+    <div class="nav-item" onclick="exportCSV()">
+      <span class="nav-icon">↓</span> Export CSV
+    </div>
+    <div class="nav-item" onclick="refreshData()">
+      <span class="nav-icon">↻</span> Sync Data
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="admin-chip">
+      <div class="admin-avatar">A</div>
+      <div class="admin-info">
+        <div class="admin-name">Admin Panel</div>
+        <div class="admin-role">● LIVE DASHBOARD</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div id="main">
+
+  <!-- TOPBAR -->
+  <div id="topbar">
+    <div style="display:flex;align-items:center;gap:1rem">
+      <button class="hamburger-btn" onclick="toggleSidebar()">☰</button>
+      <div class="topbar-title">Dashboard <span id="viewTitle">— Overview</span></div>
+    </div>
+    <div class="topbar-actions">
+      <div style="font-size:.75rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace" id="lastSync">Synced just now</div>
+      <button class="topbar-btn primary" onclick="showAddUserModal()">+ Add Student</button>
+    </div>
+  </div>
+
+  <!-- PAGE BODY -->
+  <div id="page-body">
+
+    <!-- ── OVERVIEW VIEW ── -->
+    <div id="view-overview">
+
+      <!-- Stat Cards -->
+      <div class="stats-grid">
+        <div class="stat-card green-accent animate-in">
+          <div class="stat-label"><span class="dot" style="background:var(--green)"></span>Total Students</div>
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-sub">Registered accounts</div>
+          <div class="stat-icon">◎</div>
+        </div>
+        <div class="stat-card animate-in delay-1">
+          <div class="stat-label"><span class="dot" style="background:var(--gold)"></span>Revenue</div>
+          <div class="stat-value" id="statRevenue">$0</div>
+          <div class="stat-sub">Simulated payments</div>
+          <div class="stat-icon">◈</div>
+        </div>
+        <div class="stat-card blue-accent animate-in delay-2">
+          <div class="stat-label"><span class="dot" style="background:var(--blue-acc)"></span>Completions</div>
+          <div class="stat-value" id="statComplete">0</div>
+          <div class="stat-sub">Finished all 13 lessons</div>
+          <div class="stat-icon">✓</div>
+        </div>
+        <div class="stat-card red-accent animate-in delay-3">
+          <div class="stat-label"><span class="dot" style="background:var(--red)"></span>Stuck Students</div>
+          <div class="stat-value" id="statStuck">0</div>
+          <div class="stat-sub">Failing a quiz</div>
+          <div class="stat-icon">⚠</div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-row animate-in delay-4">
+        <!-- Lesson Funnel -->
+        <div class="chart-card">
+          <div class="chart-title">📊 Lesson Drop-off Funnel <span>students per lesson</span></div>
+          <div id="funnelChart"></div>
+        </div>
+        <!-- Donut -->
+        <div class="chart-card">
+          <div class="chart-title">◉ Payment Distribution <span>plan breakdown</span></div>
+          <div class="donut-wrap">
+            <svg class="donut-svg" width="130" height="130" viewBox="0 0 130 130" id="donutSvg">
+              <circle cx="65" cy="65" r="52" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="18"/>
+              <circle cx="65" cy="65" r="52" fill="none" stroke="var(--green)" stroke-width="18"
+                stroke-dasharray="0 326.7" stroke-linecap="round" transform="rotate(-90 65 65)" id="donutPaid"/>
+              <circle cx="65" cy="65" r="52" fill="none" stroke="var(--amber)" stroke-width="18"
+                stroke-dasharray="0 326.7" stroke-linecap="round" transform="rotate(-90 65 65)" id="donutPending"/>
+              <text x="65" y="60" text-anchor="middle" font-size="18" font-weight="900" fill="white" font-family="Montserrat,sans-serif" id="donutCenter">0</text>
+              <text x="65" y="76" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.45)" font-family="Montserrat,sans-serif">students</text>
+            </svg>
+            <div class="donut-legend" id="donutLegend"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity Log -->
+      <div class="chart-card animate-in">
+        <div class="chart-title">📋 Recent Activity Log</div>
+        <div class="log-list" id="activityLog">
+          <div class="empty-state"><div class="empty-icon">📭</div><p>No activity yet</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── STUDENTS VIEW ── -->
+    <div id="view-students" style="display:none">
+      <div class="section-hdr">
+        <div class="section-hdr-left">
+          <div class="section-hdr-title">All Students</div>
+          <div class="section-hdr-count" id="studentTableCount">0 students</div>
+        </div>
+        <div class="controls-bar">
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search name or email…" oninput="filterStudents()"/>
+          </div>
+          <select class="filter-select" id="filterPayment" onchange="filterStudents()">
+            <option value="">All Payments</option>
+            <option value="paid">Paid</option>
+            <option value="pending">Pending</option>
+          </select>
+          <select class="filter-select" id="filterProgress" onchange="filterStudents()">
+            <option value="">All Progress</option>
+            <option value="complete">Completed</option>
+            <option value="active">In Progress</option>
+            <option value="stuck">Stuck</option>
+            <option value="new">Not Started</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Contact</th>
+                <th>Age</th>
+                <th>Payment</th>
+                <th>Progress</th>
+                <th>Quiz Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="studentTable">
+              <tr><td colspan="7"><div class="empty-state"><div class="empty-icon">🎓</div><p>No students registered yet.<br>Data syncs from the main course site.</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAYMENTS VIEW ── -->
+    <div id="view-payments" style="display:none">
+      <div class="section-hdr">
+        <div class="section-hdr-left">
+          <div class="section-hdr-title">Payment Records</div>
+        </div>
+        <div class="controls-bar">
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="searchPayment" placeholder="Search by name…" oninput="filterPayments()"/>
+          </div>
+        </div>
+      </div>
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Email</th>
+                <th>Plan</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Enrolled</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="paymentTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── QUIZ LOGS VIEW ── -->
+    <div id="view-quizzes" style="display:none">
+      <div class="section-hdr">
+        <div class="section-hdr-left">
+          <div class="section-hdr-title">Quiz Performance Log</div>
+        </div>
+      </div>
+
+      <!-- Lesson-by-lesson breakdown -->
+      <div class="chart-card" style="margin-bottom:1.25rem">
+        <div class="chart-title">🧠 Quiz Pass Rate by Lesson</div>
+        <div id="quizBreakdown"></div>
+      </div>
+
+      <div class="table-card">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Lessons Completed</th>
+                <th>Quiz Map</th>
+                <th>Current Status</th>
+                <th>Last Lesson</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="quizTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-body -->
+</div><!-- /main -->
+
+<!-- ══ MODAL: Unlock Lessons ══ -->
+<div class="modal-overlay" id="unlockModal">
+  <div class="modal-box">
+    <div class="modal-title">🔓 Unlock Lessons</div>
+    <div class="modal-sub" id="unlockModalSub">Manually unlock lessons for this student.</div>
+    <div class="modal-field">
+      <label>Unlock Up To Lesson</label>
+      <select id="unlockSelect"></select>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal('unlockModal')">Cancel</button>
+      <button class="modal-confirm" onclick="confirmUnlock()">🔓 Unlock</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: Reset Progress ══ -->
+<div class="modal-overlay" id="resetModal">
+  <div class="modal-box">
+    <div class="modal-title" style="color:var(--red)">⚠️ Reset Progress</div>
+    <div class="modal-sub" id="resetModalSub">This will erase all quiz completions and restart the course from Lesson 1. This action cannot be undone.</div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal('resetModal')">Cancel</button>
+      <button class="modal-confirm danger" onclick="confirmReset()">🗑️ Reset Progress</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: Add Test Student ══ -->
+<div class="modal-overlay" id="addUserModal">
+  <div class="modal-box">
+    <div class="modal-title">＋ Add Test Student</div>
+    <div class="modal-sub">Inject a simulated student into LocalStorage to preview dashboard behaviour.</div>
+    <div class="modal-field">
+      <label>Full Name</label>
+      <input type="text" id="addName" placeholder="e.g. Sara Al-Mansoori"/>
+    </div>
+    <div class="modal-field">
+      <label>Email</label>
+      <input type="email" id="addEmail" placeholder="sara@example.com"/>
+    </div>
+    <div class="modal-field">
+      <label>Phone</label>
+      <input type="text" id="addPhone" placeholder="+213 5XX XXX XXX"/>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div class="modal-field">
+        <label>Age</label>
+        <input type="number" id="addAge" placeholder="28" min="16" max="80"/>
+      </div>
+      <div class="modal-field">
+        <label>Plan</label>
+        <select id="addPlan">
+          <option value="premium">Premium ($147)</option>
+          <option value="standard">Standard ($97)</option>
+          <option value="pending">Pending (unpaid)</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-field">
+      <label>Lessons Completed (0–13)</label>
+      <input type="range" id="addLessons" min="0" max="13" value="5" oninput="document.getElementById('addLessonsVal').textContent=this.value" style="width:100%;margin-bottom:.4rem"/>
+      <div style="font-size:.8rem;color:var(--gold-light);font-weight:700"><span id="addLessonsVal">5</span> / 13 lessons</div>
+    </div>
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal('addUserModal')">Cancel</button>
+      <button class="modal-confirm" onclick="confirmAddUser()">Add Student</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span id="toastIcon">ℹ️</span>
+  <span id="toastMsg"></span>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

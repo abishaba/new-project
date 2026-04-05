@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>log in</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/docs/style.css">
+<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.1.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+<link rel="shortcut icon" href="/img/logo-removebg-preview.png" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="page-bg"></div>
+<div class="bg-grid"></div>
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<!-- TOPBAR -->
+<nav id="navbar">
+  <div class="nav-logo"><a href="#"><img src="/img/logo-removebg-preview.png" alt=""></a></div>
+  <div class="nav-links" id="navLinks">
+    <a href="/docs/index.html">Home</a>
+    <a href="/About/index.html">About</a>
+    <a href="/Curriculum/Curriculum.html">Curriculum</a>
+    <a href="/Register Page/login.html" class="nav-cta">Start Now →</a>
+    <a href="/Register Page/login.html" class="icon">Account<i class="fi fi-rr-user"></i></a>
+  </div>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<main>
+  <!-- LEFT INFO PANEL -->
+  <aside class="info-panel">
+    <div>
+      <div class="info-eyebrow" style="margin-bottom:1.25rem">
+        <span class="pulse-dot"></span>ENROLLMENT OPEN
+      </div>
+      <h2 class="info-headline">Join <em>12,400+</em><br>Marketing Experts</h2>
+    </div>
+    <p class="info-sub">Create your account in under 2 minutes. Your journey from marketer to strategist starts right here.</p>
+
+    <div class="perks-list">
+      <div class="perk-item">
+        <span class="perk-icon">🎓</span>
+        <div class="perk-text">
+          <strong>13 Expert-Crafted Lessons</strong>
+          <span>From fundamentals to full-stack strategy</span>
+        </div>
+      </div>
+      <div class="perk-item">
+        <span class="perk-icon">🔒</span>
+        <div class="perk-text">
+          <strong>Quiz-Gated Mastery System</strong>
+          <span>Prove comprehension before advancing</span>
+        </div>
+      </div>
+      <div class="perk-item">
+        <span class="perk-icon">📜</span>
+        <div class="perk-text">
+          <strong>Verified Certificate</strong>
+          <span>Shareable credential backed by real mastery</span>
+        </div>
+      </div>
+      <div class="perk-item">
+        <span class="perk-icon">♾️</span>
+        <div class="perk-text">
+          <strong>Lifetime Access + Updates</strong>
+          <span>Learn at your pace — content never expires</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="social-proof">
+      <div class="avatars">
+        <div class="avatar-sm" style="background:linear-gradient(135deg,#1A237E,#283593);color:#E8BE3A">FA</div>
+        <div class="avatar-sm" style="background:linear-gradient(135deg,#065F46,#047857);color:#34D399">YM</div>
+        <div class="avatar-sm" style="background:linear-gradient(135deg,#7C2D12,#9A3412);color:#FB923C">NC</div>
+        <div class="avatar-sm" style="background:linear-gradient(135deg,#312E81,#4338CA);color:#A78BFA">KB</div>
+        <div class="avatar-sm" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:.6rem">+12k</div>
+      </div>
+      <div class="proof-text">
+        <div class="stars-sm">★★★★★</div>
+        <strong>4.9 / 5 — 4,200+ Reviews</strong>
+        <span>Marketers in 40+ countries</span>
+      </div>
+    </div>
+
+    <div class="trust-row">
+      <div class="trust-item">🔒 SSL Encrypted</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">💳 Secure Payment</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">↩️ 30-Day Refund</div>
+    </div>
+  </aside>
+
+  <!-- CARD WRAPPER -->
+  <div class="card-wrapper">
+    <div class="reg-card" id="regCard">
+      <div class="card-accent"></div>
+
+      <!-- Step Bar -->
+      <div class="step-bar">
+        <div class="step-item">
+          <div class="step-circle active">1</div>
+          <div class="step-label active">Your Account<small>Step 1 of 3</small></div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item">
+          <div class="step-circle pending">2</div>
+          <div class="step-label">Payment<small>Step 2 of 3</small></div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item">
+          <div class="step-circle pending">3</div>
+          <div class="step-label">Access<small>Step 3 of 3</small></div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="card-body">
+        <div class="card-title">Create Your Account</div>
+        <div class="card-sub">All fields required. Your data is encrypted and never shared.</div>
+
+        <form id="regForm" novalidate autocomplete="off">
+
+          <!-- Full Name -->
+          <div class="form-group">
+            <div class="form-label">Full Name <span class="label-req">*</span></div>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="fullName" class="input-field" placeholder="e.g. Ahmed Al-Rashidi" autocomplete="name" maxlength="80"/>
+              <span class="input-status" id="fullNameSt"></span>
+            </div>
+            <div class="field-msg" id="fullNameMsg"></div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <div class="form-label">Email Address <span class="label-req">*</span></div>
+            <div class="input-wrap">
+              <span class="input-icon">✉️</span>
+              <input type="email" id="email" class="input-field" placeholder="yourname@email.com" autocomplete="email"/>
+              <span class="input-status" id="emailSt"></span>
+            </div>
+            <div class="field-msg" id="emailMsg"></div>
+          </div>
+
+          <!-- Age + Gender -->
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom:0">
+              <div class="form-label">Age <span class="label-req">*</span><span class="label-hint">Min. 16</span></div>
+              <div class="input-wrap">
+                <span class="input-icon">🎂</span>
+                <input type="number" id="age" class="input-field" placeholder="28" min="16" max="80"/>
+                <span class="input-status" id="ageSt"></span>
+              </div>
+              <div class="field-msg" id="ageMsg"></div>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <div class="form-label">Gender <span style="color:#9CA3AF;font-weight:500;text-transform:none;letter-spacing:0;font-size:.65rem">(Optional)</span></div>
+              <div class="input-wrap">
+                <span class="input-icon" style="font-size:.85rem">⚧</span>
+                <select id="gender" class="input-field" style="padding-left:2.4rem;cursor:pointer">
+                  <option value="">Prefer not to say</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group" style="margin-top:1.1rem">
+            <div class="form-label">Phone Number <span class="label-req">*</span></div>
+            <div class="phone-wrap">
+              <select class="country-select" id="countryCode">
+                <option value="+213">🇩🇿 +213</option>
+              </select>
+              <div class="phone-input-wrap">
+                <input type="tel" id="phone" class="input-field no-li" placeholder="5XX XXX XXXX" autocomplete="tel" maxlength="15"/>
+                <span class="input-status" id="phoneSt"></span>
+              </div>
+            </div>
+            <div class="field-msg" id="phoneMsg"></div>
+          </div>
+
+          <div class="form-divider">Security</div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <div class="form-label">Create Password <span class="label-req">*</span><span class="label-hint">Min. 8 chars</span></div>
+            <div class="input-wrap">
+              <span class="input-icon">🔑</span>
+              <input type="password" id="password" class="input-field" placeholder="Create a strong password" autocomplete="new-password"/>
+              <button type="button" class="toggle-btn" onclick="togglePw('password',this)" tabindex="-1">👁️</button>
+            </div>
+            <div class="strength-wrap" id="strengthWrap">
+              <div class="strength-row">
+                <div class="strength-seg" id="seg1"></div>
+                <div class="strength-seg" id="seg2"></div>
+                <div class="strength-seg" id="seg3"></div>
+                <div class="strength-seg" id="seg4"></div>
+              </div>
+              <div class="strength-label" id="strengthLbl">Weak</div>
+            </div>
+            <div class="field-msg" id="passwordMsg"></div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-group">
+            <div class="form-label">Confirm Password <span class="label-req">*</span></div>
+            <div class="input-wrap">
+              <span class="input-icon">🔐</span>
+              <input type="password" id="confirmPw" class="input-field" placeholder="Repeat your password" autocomplete="new-password"/>
+              <button type="button" class="toggle-btn" onclick="togglePw('confirmPw',this)" tabindex="-1">👁️</button>
+              <span class="input-status" id="confirmPwSt"></span>
+            </div>
+            <div class="field-msg" id="confirmPwMsg"></div>
+          </div>
+
+          <!-- Terms -->
+          <div class="terms-row">
+            <input type="checkbox" class="terms-checkbox" id="terms"/>
+            <label for="terms" class="terms-text">
+              I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I confirm I am at least 16 years old and consent to my data being stored securely for course management.
+            </label>
+          </div>
+          <div class="field-msg" id="termsMsg" style="margin-top:-.5rem;margin-bottom:.875rem"></div>
+
+          <!-- Submit -->
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <span id="btnText">Create Account &amp; Proceed to Payment</span>
+            <div class="btn-loader" id="btnLoader"></div>
+          </button>
+        </form>
+
+        <div class="login-row">Already have an account? <a href="/sign up/index.html">Sign in →</a></div>
+      </div>
+    </div>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="successOverlay">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">Account Created!</div>
+      <p class="success-sub">Welcome, <strong id="successName"></strong>!<br>Your account is ready. Redirecting you to payment now…</p>
+      <div class="redirect-bar"><div class="redirect-fill" id="redirectFill"></div></div>
+      <div class="redirect-label" id="redirectLbl">Redirecting in 3s…</div>
+    </div>
+  </div>
+  <!--footer-->
+</main>
+<footer id="footer" style="z-index: 2; margin-top:100px">
+  <div class="footer-logo">Learn Markting</div>
+  <p>© 2025 MasterMind Marketing Academy · All Rights Reserved</p>
+  <p style="margin-top:.5rem">Privacy Policy · Terms of Service · Contact</p>
+</footer>
+<!-- Footer -->
+<script src="script.js"></script>
+</body>
+</html>

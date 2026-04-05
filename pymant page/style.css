@@ -1,0 +1,58 @@
+:root {
+  --gold: #ffca28;
+  --navy: #0f172a;
+}
+
+.text-gold { color: var(--gold); }
+.bg-gold { background-color: var(--gold); }
+.border-gold { border-color: var(--gold); }
+
+.glass-card {
+  backdrop-filter: blur(16px);
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.65), rgba(15, 23, 42, 0.62));
+}
+
+.badge {
+  align-items: center;
+  border-radius: 999px;
+  background: rgba(255, 202, 40, .16);
+  border: 1px solid rgba(255, 202, 40, .35);
+  color: #ffe8a7;
+  display: inline-flex;
+  gap: .35rem;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: .35rem .7rem;
+}
+
+.method-btn {
+  transition: all .2s ease-in-out;
+}
+
+.method-btn.active {
+  background: rgba(255, 202, 40, .85);
+  border-color: rgba(255, 202, 40, 1);
+  color: #0f172a;
+}
+
+.input-field {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 0.75rem;
+  background-color: rgba(15, 23, 42, 0.80);
+  color: white;
+  padding: 0.72rem 0.78rem;
+  outline: none;
+  transition: border-color .2s ease;
+}
+.input-field:focus {
+  border-color: rgba(255, 202, 40, 0.85);
+  box-shadow: 0 0 0 3px rgba(255, 202, 40, 0.22);
+}
+
+@media (max-width: 767px) {
+  .glass-card {
+    border-radius: 1.5rem;
+  }
+}
